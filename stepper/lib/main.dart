@@ -38,7 +38,7 @@ class _State extends State<MyApp> {
   void _stepCancel(){
     setState(() {
       _current--;
-      if(_current>=_steps.length) _current=_steps.length-1;
+      if(_current>=_steps.length) _current=_steps.length+1;
     });
   }
 
