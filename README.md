@@ -2,7 +2,7 @@
 Flutter contains simple examples for learning languages.
 
 # Topics of found projects
--> Alert Dialog
+-> Alert Dialog </br>
 -> Charts
 -> AppBar
 -> Card 
@@ -17,5 +17,4 @@ Flutter contains simple examples for learning languages.
 -> Tabbar
 -> Timer
 -> Tooltips
-
 
