@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../code/GlobalState.dart';
 
 class Home extends StatefulWidget{
   @override
@@ -6,6 +7,24 @@ class Home extends StatefulWidget{
 }
 
 class _Home extends State<Home> {
+
+  TextEditingController _name;
+  GlobalState _store=GlobalState.instance;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+
+    _name=new TextEditingController();
+    _store.set("name", "");
+    _name.text=_store.get("name"); // androiddeki putextra gibi dinamik veri oluşturup diğer sayfaya yolluyoruz.
+  }
+
+  void _onPressed(){ //click verdik.
+      _store.set("name", _name.text);
+      Navigator.of(context).pushNamed("/Second");
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +41,12 @@ class _Home extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.center,
             // center vertical=true.
             children: <Widget>[
-              new Text("Welcome Home"),
+              new TextField(
+                controller: _name,
+                decoration: new InputDecoration(labelText: "İsminizi giriniz..."),
+              ),
               new RaisedButton(
-                onPressed: (){Navigator.of(context)..pushNamedAndRemoveUntil('/Second', (Route<dynamic> route)=>false);}, // routes da tanımladığımız sayfanın ismine göre navigator yönlendirme yapıyor.
+                onPressed:_onPressed, // routes da tanımladığımız sayfanın ismine göre navigator yönlendirme yapıyor.
                 child: new Text("next"),)
             ],
           ),

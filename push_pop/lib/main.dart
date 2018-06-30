@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import './screens/home.dart';
 import './screens/second.dart';
 import './screens/third.dart';
-
 void main() => runApp(new MyApp()); // ilk myapp i çalıştırıp ona göre router(yönlendiriyoruz).
 
 class MyApp extends StatelessWidget{
+
+
 
   @override
   Widget build(BuildContext context) {
