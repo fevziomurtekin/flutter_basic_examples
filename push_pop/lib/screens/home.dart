@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../screens/second.dart';
 import '../code/GlobalState.dart';
 
 class Home extends StatefulWidget{
@@ -16,13 +17,18 @@ class _Home extends State<Home> {
     // TODO: implement initState
 
     _name=new TextEditingController();
-    _store.set("name", "");
-    _name.text=_store.get("name"); // androiddeki putextra gibi dinamik veri oluşturup diğer sayfaya yolluyoruz.
+
+   /* _store.set("name", "");
+    _name.text=_store.get("name"); // androiddeki putextra gibi dinamik veri oluşturup diğer sayfaya yolluyoruz.*/
   }
 
   void _onPressed(){ //click verdik.
-      _store.set("name", _name.text);
-      Navigator.of(context).pushNamed("/Second");
+      /*_store.set("name", _name.text);
+      Navigator.of(context).pushNamed("/Second");*/
+
+      Navigator.push(context, new MaterialPageRoute(
+          builder: (BuildContext context) => new Second(_name.text),  // diğer bir gönderme şeklidir.
+      ));
 
   }
 

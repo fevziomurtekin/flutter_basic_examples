@@ -15,8 +15,7 @@ class MyApp extends StatelessWidget{
       title: "Navigation",
       routes: <String,WidgetBuilder>{
         '/Home': (BuildContext contrex)=>new Home(),
-        '/Second': (BuildContext contrex)=>new Second(),
-        '/Third': (BuildContext contrex)=>new Third(),
+        '/Second': (BuildContext contrex)=>new Second("s"),
       },
       home: new Home(),// ana sayfayı home belirledik. diğer sayfaları ise routes de belirledik.
     );
