@@ -14,16 +14,38 @@ class MyApp extends StatefulWidget{
 class _State extends State<MyApp>{
   List<BottomNavigationBarItem> items;
   String _values="";
-  int index=0;
+  final Key mapPage = PageStorageKey('map');
+  final Key poolPage = PageStorageKey('pool');
+  final Key schoolPage = PageStorageKey('school');
+
+  int currentTab = 0;
+  Maps maps;
+  Pools pools;
+  Schools schools;
+  List<Widget> pages;
+  Widget currentPage;
+  final PageStorageBucket bucket = PageStorageBucket();
 
   @override
   void initState() {
     // TODO: implement initState
+
+    maps=new Maps(
+      key:mapPage,
+    );
+
+    pools=new Pools(
+      key: poolPage,
+    );
+
+    schools=new Schools(
+      key:schoolPage,
+    );
+
+    pages=[maps,pools,schools];
+    currentPage = maps;
     super.initState();
-    items=new List();
-    items.add(new BottomNavigationBarItem(icon: new Icon(Icons.map), title: new Text("Map")));
-    items.add(new BottomNavigationBarItem(icon: new Icon(Icons.poll), title: new Text("Poll")));
-    items.add(new BottomNavigationBarItem(icon: new Icon(Icons.school), title: new Text("Scholl")));
+
   }
 
   @override
@@ -31,31 +53,115 @@ class _State extends State<MyApp>{
     // TODO: implement build
     return new Scaffold( // app bar gibi bazı materiallerin bulunduğu sınıf.
       appBar: new AppBar(
-        title: new Text("First App"),
+        title: new Text("Bottom Navigation"),
       ),
-      body: new Container(
-        padding: new EdgeInsets.all(32.0),
-        child: new Center( // center horizontal=true
-          child: new Column(
-            mainAxisAlignment: MainAxisAlignment.center, // center vertical=true.
-            children: <Widget>[
-              new Text(_values),
-            ],
-          ),
-        ),
-      ),
-      bottomNavigationBar: new BottomNavigationBar(
-        items: items, // itemini atadık.
-        fixedColor: Colors.red, //tıklanınca iconunun rengini değişterecek rengi değiştirdik.
-        currentIndex: index,
-        onTap: (int item){
-          setState(() {
-            index=item;
-            _values=" Current value is : ${index.toString()}";
-          });
-        },
-      ), // Alt menu de tab bar oluşturdu.
+      body:PageStorage(
+        bucket: bucket,
+        child: currentPage) ,
+        bottomNavigationBar:new BottomNavigationBar(
+        currentIndex: currentTab,
+        onTap: (int index){
+        setState(() {
+        currentTab=index; // tapa tıklanınca indexini verdik ona göre sayfa değişecek.
+        currentPage=pages[index];
+      });
+    },
+      items: [
+      new BottomNavigationBarItem(
+        icon: new Icon(Icons.map),
+        title: new Text(
+        "Map",
+        style: new TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 14.0
+        ),)),
+      new BottomNavigationBarItem(
+        icon: new Icon(Icons.pool),
+        title: new Text("Pool",
+        style: new TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 14.0
+        ),)),
+      new BottomNavigationBarItem(
+        icon: new Icon(Icons.school),
+        title: new Text("School",
+        style: new TextStyle(
+        fontWeight: FontWeight.bold,
+        fontSize: 14.0
+        ),)),
+        ]),
     );
   }
 
+}
+
+class Maps extends StatefulWidget{
+    Maps({Key key}) : super(key:key);
+
+  @override
+  MapsState createState() => MapsState();
+}
+
+class MapsState extends State<Maps>{
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return new Container(
+      child: new Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          new Padding(padding: EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 0.0)),
+          new Text("Map",style: new TextStyle(fontWeight:FontWeight.bold),),
+        ],
+      ),
+    );
+  }
+}
+
+
+class Pools extends StatefulWidget{
+  Pools({Key key}) : super(key:key);
+
+  @override
+  PoolsState createState() => PoolsState();
+}
+
+class PoolsState extends State<Pools>{
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return new Container(
+      child: new Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          new Padding(padding: EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 0.0)),
+          new Text("Pool",style: new TextStyle(fontWeight:FontWeight.bold),),
+        ],
+      ),
+    );
+  }
+}
+
+
+class Schools extends StatefulWidget{
+  Schools({Key key}) : super(key:key);
+
+  @override
+   SchoolsState createState() => SchoolsState();
+}
+
+class SchoolsState extends State<Schools>{
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return new Container(
+      child: new Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          new Padding(padding: EdgeInsets.fromLTRB(0.0, 50.0, 0.0, 0.0)),
+          new Text("School",style: new TextStyle(fontWeight:FontWeight.bold),),
+        ],
+      ),
+    );
+  }
 }

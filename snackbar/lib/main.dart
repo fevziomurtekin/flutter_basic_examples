@@ -25,7 +25,7 @@ class _State extends State<MyApp>{
     return new Scaffold(
       key: globalKey, // key veriyoruz. Snackbar için.
       appBar: new AppBar(
-        title: new Text("First App"),
+        title: new Text("Snackbar"),
       ),
       body: new Container(
         padding: new EdgeInsets.all(32.0),
